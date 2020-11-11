@@ -16,6 +16,14 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+//brand route
+	Route::get('/brand/{brand}', 'BrandController@index')->name('brand');
+// end brand route 
+
+//brand route
+	Route::get('/category/{category}', 'CategoryController@index')->name('category');
+// end brand route 
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/store', 'HomeController@store')->name('store');
@@ -28,7 +36,9 @@ Route::get('/checkout/{amount}', 'ProductController@checkout')->name('cart.check
 Route::post('/charge', 'ProductController@charge')->name('cart.charge');
 Route::get('/order', 'OrderController@index')->name('order.index');
 
-
+// dashboard routes
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+// end dashboard routes
+

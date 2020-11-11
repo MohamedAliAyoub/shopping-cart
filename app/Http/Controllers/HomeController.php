@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Brand;
+use App\Category;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
@@ -25,7 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $categories = Category::get();
+        $brands = Brand::get();
+        return view('home' , compact('categories' , 'brands'));
     }
     public function store()
     {
@@ -33,8 +37,9 @@ class HomeController extends Controller
         {
             toast(session('success'), 'success');
         }
-
+        $categories = Category::get();
+        $brands = Brand::get();
         $latestProducts = Product::latest()->take(3)->get();
-        return view('store' , compact('latestProducts'));
+        return view('store' , compact('latestProducts' , 'categories' , 'brands'));
     }
 }
